@@ -17,33 +17,20 @@ const composeEnhancers =
     }) : compose;
 
 const loggerMiddleware = store => next => action => {
-
-  let colorInterval = store.getState().colorInterval;
-  let counter = {value: store.getState().counter}; 
-
-  if (!colorInterval || typeof counter.value != "number") {
-    counter.value = 0;
-    colorInterval = setInterval(() => ++counter.value, 1000)
-  }
-
-  // const result = 
-  next({...action, colorInterval: colorInterval, counter: counter});
-  
-  // return result
+  const result = next(action)
+  return result
 }
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(
   loggerMiddleware, reduxThunk
 )))
 
-window.store = store
-
 // var cors = require('cors')
 
 const app = (
   <Provider store={store}>
     <BrowserRouter>
-      <App/>
+      <App />
     </BrowserRouter>
   </Provider>
   

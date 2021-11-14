@@ -3091,7 +3091,7 @@ boolbase@^1.0.0, boolbase@~1.0.0:
 
 bootstrap@5.1.3:
   version "5.1.3"
-  resolved "https://registry.npmjs.org/bootstrap/-/bootstrap-5.1.3.tgz"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.1.3.tgz#ba081b0c130f810fa70900acbc1c6d3c28fa8f34"
   integrity sha512-fcQztozJ8jToQWXxVuEyXWW+dSo8AiXWKwiSSrKWsRB/Qt+Ewwza+JWoLKiTuQLaEPhdNAJ7+Dosc9DOIqNy7Q==
 
 bowser@^1.7.3:
@@ -9736,7 +9736,7 @@ react-app-polyfill@^2.0.0:
 
 react-bootstrap@^2.0.2:
   version "2.0.2"
-  resolved "https://registry.npmjs.org/react-bootstrap/-/react-bootstrap-2.0.2.tgz"
+  resolved "https://registry.yarnpkg.com/react-bootstrap/-/react-bootstrap-2.0.2.tgz#ec3492513066038bcf612ab8fcab46f88d254ab9"
   integrity sha512-QuMqJ+WJmd6dUyOys6OF3nr6T/FjUVAoEMbSjsFrwVufJtvMox0SU1Dvz/cDID+Dl6Rz2RLcJzyqkdl+DEK2Gg==
   dependencies:
     "@babel/runtime" "^7.14.0"
@@ -9927,11 +9927,6 @@ react-scripts@^4.0.3:
     workbox-webpack-plugin "5.1.4"
   optionalDependencies:
     fsevents "^2.1.3"
-
-react-service-worker@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/react-service-worker/-/react-service-worker-0.1.1.tgz#866dd5d7245e4688796d3697e439e946f9c87cbd"
-  integrity sha512-NNv1QfF7lpH6ir/J3TrRTcLqP/veE+qRnCyvnZujo2lVCSpszYZRigceNhic+x9FwsBGsvkGrgZiXiq4C+VbxA==
 
 react-transition-group@^4.4.1:
   version "4.4.2"

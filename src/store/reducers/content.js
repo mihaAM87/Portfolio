@@ -1,36 +1,36 @@
-import {LOAD_COUNTER, START, SUCCESS, TIME, YELLOW, RED, GREEN, ERROR} from '../actions/actionTypes';
+import {LOAD_ALL_CONTENTS, START, SUCCESS, ERROR} from '../actions/actionTypes';
 import {OrderedMap, Record} from 'immutable'
 
 const ReducerState = Record({
+  loading: false,
+  loaded: false,
   entities: new OrderedMap({})
 })
 
 const defaultState = new ReducerState()
 
 const initialState = {
-  counter: {value: 0},
-  colorIndex: 0,
-  colorsObj: [
-    {color: YELLOW, limit: YELLOW + TIME, class: 'yellow'}, 
-    {color: RED, limit: RED + TIME, class: 'red'}, 
-    {color: YELLOW, limit: YELLOW + TIME, class: 'yellow'},
-    {color: GREEN, limit: GREEN + TIME, class: 'green'}
-  ]
+  contentArr: [],
+  track: [],
+  loading: false,
+  error: null,
+  results: {},
+  isFinished: false
 }
 
 export default function contentReducer(state = initialState, action) {
   switch (action.type) {
-    case LOAD_COUNTER + START:
+    case LOAD_ALL_CONTENTS + START:
       return {
-        ...state, colorsObj: action.colorsObj, counter: action.counter, colorIndex: action.colorIndex
+        ...state, loading: true
       }
-    case LOAD_COUNTER + SUCCESS:
+    case LOAD_ALL_CONTENTS + SUCCESS:
       return {
-        ...state, colorsObj: action.colorsObj, counter: action.counter, colorIndex: action.colorIndex
+        ...state, loading: false, contentArr: action.contentArr, track: action.track
       }
-    case LOAD_COUNTER + ERROR:
+    case LOAD_ALL_CONTENTS + ERROR:
       return {
-        ...state, error: action.error
+        ...state, loading: false, error: action.error
       }
     default:
         return state
