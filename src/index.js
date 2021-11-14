@@ -8,6 +8,7 @@ import contentReducer from './store/reducers/content'
 import {Provider} from 'react-redux'
 import rootReducer from './store/rootReducer'
 import reduxThunk from 'redux-thunk'
+import registerServiceWorker from 'react-service-worker';
 
 const composeEnhancers =
   typeof window === 'object' &&
@@ -37,3 +38,4 @@ const app = (
 )
 
 ReactDOM.render(app, document.getElementById('root'))
+registerServiceWorker()
