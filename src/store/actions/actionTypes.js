@@ -1,4 +1,11 @@
-export const LOAD_ALL_CONTENTS = 'LOAD_ALL_CONTENTS_'
+export const LOAD_COUNTER = 'LOAD_COUNTER_'
 export const START = 'START'
 export const SUCCESS = 'SUCCESS'
 export const ERROR = 'ERROR'
+export const YELLOW = 'YELLOW'
+export const GREEN = 'GREEN'
+export const RED = 'RED'
+export const RED_TIME = 10
+export const YELLOW_TIME = 3
+export const GREEN_TIME = 15
+export const TIME = '_TIME'

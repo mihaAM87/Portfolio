@@ -1,54 +1,37 @@
-import {LOAD_ALL_CONTENTS, START, SUCCESS, ERROR} from '../actions/actionTypes';
-import axios from 'axios'
+import {LOAD_COUNTER, START, SUCCESS, RED, YELLOW, GREEN, RED_TIME, YELLOW_TIME, GREEN_TIME, ERROR} from '../actions/actionTypes';
 
-import source from '../source/source.json';
-
-export function fetchContentStart(contentArr) {
+export function fetchContentStart(colorsObj, colorIndex, counter) {
   return {
-    type: LOAD_ALL_CONTENTS + START,
-    contentArr
+    type: LOAD_COUNTER + START
   }
 }
 
-export function fetchContentSuccess(contentArr, track) {
+export function fetchContentSuccess(colorsObj, colorIndex, counter) {
   return {
-    type: LOAD_ALL_CONTENTS + SUCCESS,
-    contentArr,
-    track
+    type: LOAD_COUNTER + SUCCESS,
+    colorsObj,
+    colorIndex,
+    counter
   }
 }
 
 export function fetchContentError(e) {
   return {
-    type: LOAD_ALL_CONTENTS + ERROR,
+    type: LOAD_COUNTER + ERROR,
     error: e
   }
 }
 
-export function fetchContentById(name, contentArr, track) {
+export function changeCounter(colorsObj, colorIndex, counter) {
   return async dispatch => {
     dispatch(fetchContentStart());
 
     try {
 
-      if (!contentArr || contentArr.length == 0) {
-        contentArr = source;
-      }
       
-      if (name != "..") {
-        if (!name || name == "") {
-          let firstElem = contentArr[0];
-          track.push(firstElem.name);
-        } else {
-          track.push(name);
-        }
-      } else {
-        track.pop();
-      }
-
-      contentArr = findFolger(source, contentArr, name, track, null);
+      colorIndex = changeColor(colorsObj, colorIndex, counter);
       
-      dispatch(fetchContentSuccess(contentArr, track));
+      dispatch(fetchContentSuccess(colorsObj, colorIndex, counter));
 
     } catch (e) {
       dispatch(fetchContentError(e));
@@ -56,34 +39,29 @@ export function fetchContentById(name, contentArr, track) {
   }
 }
 
-function findFolger(source, arr, name, track, backStep = null) {
-  if (!arr || arr.length == 0) {
-    return null;
-  } 
+function changeColor(colorsObj, colorIndex, counter) {
+  
+  switch (colorIndex) {
+    case 1:
+      if (counter >= colorsObj[colorIndex].limit) {
 
-  if (!name || name == "") {
-    let firstElem = arr[0];
-    return firstElem.contents;
+        ++colorIndex;
+      }
+    break;
+    case 2:
+      if (counter >= colorsObj[colorIndex].limit) {
+        ++colorIndex;
+      }
+    break;
+    case 3:
+      if (counter >= colorsObj[colorIndex].limit) {
+        colorIndex = 0;
+      }
+      break;
+    default:
+        colorIndex = 0;
+      break;
   }
 
-  if (name == "..") {
-    if (typeof backStep != "number") {
-      backStep = 1;
-      arr = source[0].contents
-    } else {
-      backStep += 1;
-    }
-
-    if (!(backStep < track.length)) {
-      name = track[backStep - 1];
-      backStep = null;
-      return arr;
-    } else {
-      return findFolger(source, arr.find(item => item.name == track[backStep]).contents, name, track, backStep);
-    }
-  }
-
-  let findElement = arr.find(item => item.name == name)
-
-  return findElement ? findElement.contents : null;
+  return colorIndex;
 }
